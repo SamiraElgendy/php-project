@@ -1,14 +1,13 @@
 <?php
 require '../helpers/dbConnection.php';
 require '../helpers/functions.php';
-
+require '../helpers/checkLogin.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = Clean($_POST['title']);
     $content = Clean($_POST['content']);
     $date = Clean($_POST['date']);
 
-    # Validate Title ....
     $errors = [];
 
     # Validate Title
@@ -51,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (count($errors) > 0) {
         $Message = $errors;
     } else {
-        // DB CODE .....
+        
 
         $disPath = './uploads/' . $FinalName;
 
@@ -71,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $Message = ['Message' => 'Error  in uploading Image  Try Again '];
         }
     }
-    # Set Session ......
+    
     $_SESSION['Message'] = $Message;
 }
 
@@ -95,7 +94,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (isset($_SESSION['Message'])) {
                 Messages($_SESSION['Message']);
             
-                # Unset Session ...
                 unset($_SESSION['Message']);
             }
             

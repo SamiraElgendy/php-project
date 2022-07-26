@@ -1,8 +1,7 @@
 <?php
 require '../helpers/dbConnection.php';
 require '../helpers/functions.php';
-################################################################
-# Fetch  User Data .......
+
 
 if($_SESSION['user']['role_id'] == 2){
    $sql = 'select articals.*,user.fname  from  articals inner join user on user.id = articals.addedBy';
@@ -12,9 +11,7 @@ if($_SESSION['user']['role_id'] == 2){
 }
 
 
-
 $op = mysqli_query($con, $sql);
-################################################################
 
 ?>
 

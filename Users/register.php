@@ -3,16 +3,11 @@ require '../helpers/dbConnection.php';
 require '../helpers/functions.php';
 
 
-#########################################################################
-# Fetch Roles .... 
+
 $sql = "select * from roles";
 $RoleOp  = mysqli_query($con,$sql);
 
-#########################################################################
 
-
-
-# Code .....
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $fname      = Clean($_POST['fname']);
@@ -23,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $date   = Clean($_POST['date']);
 
 
-    # Validate name ....
+   
     $errors = [];
 
     if (!Validate($fname, 1)) {
@@ -37,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } elseif (!Validate($lname, 6)) {
         $errors['lName'] = 'Invalid String';
     }
-    # Validate Email
+
     if (!Validate($email,1)) {
         $errors['Email'] = 'Field Required';
     } elseif (!Validate($email,2)) {
@@ -45,15 +40,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
 
-    # Validate Password
+    
     if (!Validate($password,1)) {
         $errors['Password'] = 'Field Required';
     } elseif (!Validate($password,3)) {
         $errors['Password'] = 'Length must be >= 6 chars';
     }
 
-    
-     # Validate role_id .... 
+   
      if (!Validate($role_id,1)) {
         $errors['Role'] = 'Field Required';
     }elseif(!Validate($role_id,4)){
@@ -61,7 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
    
-    # Validate Image
     if (!Validate($_FILES['image']['name'],1)) {
         $errors['Image'] = 'Field Required';
     }else{
@@ -84,8 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (count($errors) > 0) {
         $Message = $errors;
     } else {
-        // DB CODE .....
-
+        
        $disPath = './uploads/'.$FinalName;
 
 
@@ -105,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
        }
     
     }
-    # Set Session ......
+
     $_SESSION['Message'] = $Message;
 }
 
@@ -129,7 +121,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (isset($_SESSION['Message'])) {
                 Messages($_SESSION['Message']);
             
-                # Unset Session ...
                 unset($_SESSION['Message']);
             }
             

@@ -3,7 +3,6 @@
 require '../helpers/dbConnection.php';
 
 
-# Fetch Id .... 
 $id = $_GET['id'];
 
 $sql = "select * from articals where id = $id";
@@ -11,10 +10,8 @@ $op  = mysqli_query($con,$sql);
 
 $data = mysqli_fetch_assoc($op);
 
-# Check If Count == 1 
 if(mysqli_num_rows($op) == 1){
 
-    // delete code ..... 
    $sql = "delete from articals where id = $id";
    $op  = mysqli_query($con,$sql);
 
@@ -32,7 +29,7 @@ if(mysqli_num_rows($op) == 1){
     $Message = ["Message" => "Invalid Id "];
 }
 
-   #   Set Session 
+ 
    $_SESSION['Message'] = $Message;
 
    header("location: index.php");

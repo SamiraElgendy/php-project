@@ -3,7 +3,6 @@ require '../helpers/dbConnection.php';
 require '../helpers/functions.php';
 
 
-#############################################################################
 $id = $_GET['id'];
 
 $sql = "select * from articals where id = $id";
@@ -11,8 +10,6 @@ $op = mysqli_query($con, $sql);
 
 if (mysqli_num_rows($op) == 1) {
 
-    
-    // code .....
     $BlogData = mysqli_fetch_assoc($op);
 
       if(!($_SESSION['user']['role_id'] == 2 || ($_SESSION['user']['id'] == $BlogData['addedBy']))){
@@ -20,9 +17,6 @@ if (mysqli_num_rows($op) == 1) {
         exit();
 
       }
-
-
-
 
 } else {
     $_SESSION['Message'] = ['Message' => 'Invalid Id'];
@@ -78,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (count($errors) > 0) {
         $Message = $errors;
     } else {
-        // DB CODE .....
+       
 
         if (Validate($_FILES['image']['name'], 1)) {
             $disPath = './uploads/' . $FinalName;
