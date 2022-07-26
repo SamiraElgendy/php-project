@@ -7,7 +7,7 @@ require '../helpers/functions.php';
 if($_SESSION['user']['role_id'] == 2){
    $sql = 'select articals.*,user.fname  from  articals inner join user on user.id = articals.addedBy';
 }else{
-   $sql = 'select articals.*,user.name  from  articals inner join user on user.id = articals.addedBy where articals.addedBy = '.$_SESSION['user']['id'];
+   $sql = 'select articals.*,user.fname  from  articals inner join user on user.id = articals.addedBy where articals.addedBy = '.$_SESSION['user']['id'];
 
 }
 
